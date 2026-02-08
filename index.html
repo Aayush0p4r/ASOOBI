@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASOOBI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <img src="pic/image 1.png" alt="ASOOBI Logo" class="loader-logo">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+             <img src="pic/image 1.png" alt="ASOOBI" class="nav-logo-img">
+             <!-- Fallback text if needed, but image used as per previous request. 
+                  If image 1 is just the icon, we might need text next to it. 
+                  Assuming image 1 is the full logo for now or just the icon. 
+                  The screenshot shows text "ASOOBI". I will add text if the image is just an icon.
+                  But for now sticking to the image as the logo source. 
+             -->
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#creators">For creator</a></li>
+            <li><a href="#brands">For brand</a></li>
+            <li><a href="#why">Why Asoobi</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="btn-book">Contact</a>
+        <div class="mobile-menu-toggle">☰</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            
+            <!-- Hero Text Content -->
+            <div class="hero-text-centered">
+                <h1 class="hero-headline">
+                    Talent <span class="highlight-purple-text">beyond</span><br>
+                    algorithms and<br>
+                    numbers
+                </h1>
+                <p class="hero-subtext">
+                    A professional space for creators and brands to collaborate based on real talent.
+                </p>
+                <a href="#creators" class="btn-explore">Explore ASOOBI</a>
+            </div>
+
+            <!-- Floating Elements (Images) -->
+            <!-- Positioning these around the center text -->
+            <img src="pic/image 2.jpeg" class="float-item float-1" alt="Creator">
+            <img src="pic/image 3.jpeg" class="float-item float-2" alt="Creator">
+            <img src="pic/image 4.jpeg" class="float-item float-3" alt="Creator">
+            <img src="pic/image 5.jpeg" class="float-item float-4" alt="Creator">
+
+            <!-- Decorative Stars -->
+            <div class="star star-1">✦</div>
+            <div class="star star-2">✦</div>
+            <div class="star star-3">✦</div>
+            <div class="star star-4">✦</div>
+
+             <!-- Dashed Circles (Background decoration) -->
+            <div class="dashed-circle left"></div>
+            <div class="dashed-circle right"></div>
+        </div>
+    </section>
+
+    <!-- For Creators Section -->
+    <section id="creators" class="section-creators">
+        <h2 class="section-title">For<br>Creators</h2>
+        
+        <div class="features-grid">
+            <!-- Card 1: Creator Discovery -->
+            <div class="card card-pink card-tall">
+                <h3>Creator<br>discovery</h3>
+                <!-- Image/Illustration placeholder -->
+                <div class="card-spacer"></div> 
+                <p class="card-desc">
+                    Creators can get discovered through platform-led opportunities, including curated competitions that highlight talent beyond follower count.
+                </p>
+            </div>
+
+            <!-- Center Group -->
+            <div class="card-group-center">
+                <!-- Circular Element -->
+                <div class="circle-text-container">
+                    <div class="dashed-circle-spin"></div>
+                    <h3 class="circle-text">Great content<br>shouldn't depend<br>on <span class="highlight-pill">viral luck</span></h3>
+                </div>
+                
+                <div class="row-cards">
+                    <!-- Creator Journey -->
+                    <div class="card card-blue-light card-wide">
+                        <div class="card-header-row">
+                             <img src="pic/image 3.jpeg" class="small-round" alt="Jenna">
+                             <h4>A creator<br>journey</h4>
+                        </div>
+                        <div class="card-content-text">
+                            <p><strong>Jenna</strong><br>Emerging creator</p>
+                            <p class="text-xs">Category: Lifestyle</p>
+                            <p class="text-xs">Status: Consistent content · Limited reach</p>
+                        </div>
+                    </div>
+                    <!-- List Card -->
+                    <div class="card card-yellow card-wide">
+                       <ul>
+                           <li>• Overlooked by algorithms</li>
+                           <li>• Discovered through talent-focused opportunities</li>
+                           <li>• Professional brand collaboration</li>
+                       </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Right Purple Block -->
+            <div class="card card-purple card-square"></div>
+        </div>
+    </section>
+
+    <!-- For Brands Section -->
+    <section id="brands" class="section-brands">
+         <h2 class="section-title">For<br>Brands</h2>
+
+         <div class="features-grid">
+            <!-- Card 1: Discover Creator -->
+            <div class="card card-pink card-tall">
+                <h3>Discover<br>creator</h3>
+                 <div class="card-spacer"></div>
+                 <p class="card-desc">
+                    ASOOBI helps brands identify authentic creators by detecting fake followers and inflated metrics. <br><br>
+                    This ensures collaborations are based on real engagement, not misleading numbers.
+                 </p>
+            </div>
+
+             <!-- Center Group -->
+             <div class="card-group-center">
+                <!-- Circular Element -->
+                <div class="circle-text-container">
+                    <div class="dashed-circle-spin"></div>
+                    <h3 class="circle-text">Choosing creators<br>shouldn't rely<br>on <span class="highlight-pill">guesswork.</span></h3>
+                </div>
+                
+                <div class="row-cards">
+                    <!-- Brand Journey -->
+                    <div class="card card-blue-light card-wide">
+                        <div class="card-header-row">
+                             <div class="rect-box-blue"></div>
+                             <h4>Brand<br>journey</h4>
+                        </div>
+                        <div class="card-content-text">
+                            <p><strong>Brand team</strong><br>Looking for the right creators</p>
+                            <p class="text-xs">Category: Campaign / Product marketing</p>
+                            <p class="text-xs">Status: Creator selection · Trust uncertainty</p>
+                        </div>
+                    </div>
+                     <!-- List Card -->
+                     <div class="card card-yellow card-wide">
+                        <ul>
+                            <li>• Unclear creator authenticity</li>
+                            <li>• Discovered through verified, talent-focused insights</li>
+                            <li>• Confident, professional creator collaboration</li>
+                        </ul>
+                     </div>
+                </div>
+            </div>
+
+             <!-- Card 3: Right Purple Block -->
+             <div class="card card-purple card-square"></div>
+         </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="why" class="section-how">
+        <h2 class="section-title-center">How ASOOBI WORKS</h2>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <!-- Placeholder for illustration -->
+                <img src="pic/long 1.png" alt="Build & verify" class="step-illustration">
+                <h3>Build<br>& verify</h3>
+                <p>Creators build profiles showcasing their work. ASOOBI evaluates engagement to reduce fake or inflated metrics.</p>
+            </div>
+            <div class="step-card">
+                <img src="pic/long 2.png" alt="Discover & match" class="step-illustration">
+                <h3>Discover<br>& match</h3>
+                <p>Brands discover creators through verified insights, relevance, and platform-led opportunities — not just follower count.</p>
+            </div>
+            <div class="step-card">
+                <img src="pic/long 3.png" alt="Collaborate & grow" class="step-illustration">
+                <h3>Collaborate<br>& grow</h3>
+                <p>Collaborations move forward through a structured, transparent process designed for both creators and brands.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Left Column: Logo, Newsletter, Social -->
+            <div class="footer-left">
+                <img src="pic/image 1.png" alt="ASOOBI" class="footer-logo">
+                
+                <div class="newsletter">
+                    <h4>ASOOBI Newsletter</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Work Email*" required>
+                        <button type="submit">→</button>
+                    </form>
+                </div>
+
+                <div class="social-icons">
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="YouTube">▶</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="TikTok">♪</a>
+                    <a href="#" aria-label="Snapchat">👻</a>
+                </div>
+            </div>
+
+            <!-- Footer Links Columns -->
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Creator Marketplace</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="#">Customer Stories</a></li>
+                        <li><a href="#">I'm a Creator</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Free tools</h4>
+                    <ul>
+                        <li><a href="#">Instagram audit tool</a></li>
+                        <li><a href="#">TikTok audit tool</a></li>
+                        <li><a href="#">Twitter audit tool</a></li>
+                        <li><a href="#">Youtube audit tool</a></li>
+                        <li><a href="#">Influencer Search Tool</a></li>
+                        <li><a href="#">More tools</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="#">Meet the Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                        <li><a href="#">Partner Program</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="contact.html">Contact us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 ASOOBI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
