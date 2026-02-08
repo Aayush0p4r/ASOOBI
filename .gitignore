@@ -3,9 +3,7 @@
 .env.local
 
 # Service account keys
-*.json
-!package.json
-!package-lock.json
+package-lock.json
 
 # Node modules
 node_modules/
