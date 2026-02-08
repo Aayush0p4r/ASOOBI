@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Target elements for scroll animations
     const animatedElements = document.querySelectorAll(
-        '.card, .section-title, .hero-headline, .hero-subtext, .btn-explore, .step-card, .circle-text, .float-item'
+        '.card, .section-title, .hero-headline, .hero-subtext, .btn-explore, .step-card, .circle-text, .float-item, .testimonial-card, .testimonials-title'
     );
 
     animatedElements.forEach((el, index) => {
@@ -63,10 +63,12 @@ document.addEventListener('DOMContentLoaded', function() {
         el.style.transitionDelay = `${index * 0.05}s`;
         
         // Add animation class based on element type or position
-        if (el.classList.contains('section-title')) {
+        if (el.classList.contains('section-title') || el.classList.contains('testimonials-title')) {
             el.classList.add('fade-in-up');
         } else if (el.classList.contains('float-item')) {
             el.classList.add('fade-in');
+        } else if (el.classList.contains('testimonial-card')) {
+            el.classList.add('slide-in-up');
         } else if (index % 2 === 0) {
             el.classList.add('slide-in-left');
         } else {

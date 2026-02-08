@@ -1,11 +1,65 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { google } = require('googleapis');
 
 const PORT = process.env.PORT || 3000;
 // Use persistent disk path if provided (for Render), otherwise use current directory
 const DATA_DIR = process.env.DATA_DIR || '.';
 const FEEDBACK_FILE = path.join(DATA_DIR, 'feedback.csv');
+
+// Google Sheets Configuration
+const GOOGLE_SHEETS_ENABLED = process.env.GOOGLE_SHEETS_ID && process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+let sheets = null;
+
+// Initialize Google Sheets API
+if (GOOGLE_SHEETS_ENABLED) {
+    try {
+        const auth = new google.auth.GoogleAuth({
+            credentials: {
+                type: 'service_account',
+                project_id: process.env.GOOGLE_PROJECT_ID,
+                private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
+                private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+                client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+                client_id: process.env.GOOGLE_CLIENT_ID,
+                auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+                token_uri: 'https://oauth2.googleapis.com/token',
+                auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+                client_x509_cert_url: `https://www.googleapis.com/robot/v1/metadata/x509/${encodeURIComponent(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL)}`
+            },
+            scopes: ['https://www.googleapis.com/auth/spreadsheets']
+        });
+        
+        sheets = google.sheets({ version: 'v4', auth });
+        console.log('✅ Google Sheets integration enabled');
+    } catch (error) {
+        console.error('❌ Failed to initialize Google Sheets:', error.message);
+    }
+}
+
+// Function to append feedback to Google Sheets
+async function appendToGoogleSheets(timestamp, name, email, type, message) {
+    if (!GOOGLE_SHEETS_ENABLED || !sheets) {
+        return { success: false, message: 'Google Sheets not configured' };
+    }
+    
+    try {
+        const response = await sheets.spreadsheets.values.append({
+            spreadsheetId: process.env.GOOGLE_SHEETS_ID,
+            range: 'Sheet1!A:E', // Adjust if your sheet has a different name
+            valueInputOption: 'USER_ENTERED',
+            resource: {
+                values: [[timestamp, name, email, type, message]]
+            }
+        });
+        
+        return { success: true, data: response.data };
+    } catch (error) {
+        console.error('Error appending to Google Sheets:', error.message);
+        return { success: false, message: error.message };
+    }
+}
 
 // Helper to get today's date string
 function getTimestamp() {
@@ -34,22 +88,41 @@ const server = http.createServer((req, res) => {
         req.on('end', () => {
             try {
                 const data = JSON.parse(body);
+                const timestamp = getTimestamp();
+                
                 // Sanitize fields to prevent CSV injection mostly by escaping commas or newlines
                 const sanitize = (str) => `"${(str || '').replace(/"/g, '""')}"`;
                 
-                const csvLine = `${getTimestamp()},${sanitize(data.name)},${sanitize(data.email)},${sanitize(data.type)},${sanitize(data.message)}\n`;
+                const csvLine = `${timestamp},${sanitize(data.name)},${sanitize(data.email)},${sanitize(data.type)},${sanitize(data.message)}\n`;
                 
+                // Save to CSV file (local backup)
                 fs.appendFile(FEEDBACK_FILE, csvLine, (err) => {
                     if (err) {
-                        console.error('Error writing to file', err);
-                        res.writeHead(500, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ error: 'Failed to save feedback' }));
+                        console.error('Error writing to CSV file', err);
                     } else {
-                        console.log('Feedback saved:', csvLine);
-                        res.writeHead(200, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ message: 'Feedback saved' }));
+                        console.log('✅ Feedback saved to CSV:', csvLine);
                     }
                 });
+                
+                // Also save to Google Sheets (async, don't wait)
+                if (GOOGLE_SHEETS_ENABLED) {
+                    appendToGoogleSheets(timestamp, data.name, data.email, data.type, data.message)
+                        .then(result => {
+                            if (result.success) {
+                                console.log('✅ Feedback saved to Google Sheets');
+                            } else {
+                                console.error('⚠️ Failed to save to Google Sheets:', result.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('⚠️ Google Sheets error:', error.message);
+                        });
+                }
+                
+                // Respond immediately to user
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ message: 'Feedback saved' }));
+                
             } catch (e) {
                 console.error('Error parsing JSON', e);
                 res.writeHead(400, { 'Content-Type': 'application/json' });

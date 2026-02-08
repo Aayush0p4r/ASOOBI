@@ -1,0 +1,27 @@
+# Environment variables
+.env
+.env.local
+
+# Service account keys
+*.json
+!package.json
+!package-lock.json
+
+# Node modules
+node_modules/
+
+# Local data
+feedback.csv
+GOOGLE_SHEETS_SETUP.md
+SHEETS_QUICKSTART.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

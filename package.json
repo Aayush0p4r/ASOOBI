@@ -1,0 +1,16 @@
+{
+  "name": "asoobi",
+  "version": "1.0.0",
+  "description": "ASOOBI platform for creators and brands",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["creators", "brands", "influencer"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^128.0.0"
+  }
+}
