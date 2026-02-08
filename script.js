@@ -5,6 +5,38 @@ document.addEventListener('DOMContentLoaded', function() {
         loader.classList.add('hidden');
     }, 3000);
 
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const navbar = document.querySelector('.navbar');
+    
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('mobile-menu-active');
+            navbar.classList.toggle('menu-open');
+            // Toggle icon
+            this.textContent = navLinks.classList.contains('mobile-menu-active') ? '✕' : '☰';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!navbar.contains(event.target) && navLinks.classList.contains('mobile-menu-active')) {
+                navLinks.classList.remove('mobile-menu-active');
+                navbar.classList.remove('menu-open');
+                mobileMenuToggle.textContent = '☰';
+            }
+        });
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('mobile-menu-active');
+                navbar.classList.remove('menu-open');
+                mobileMenuToggle.textContent = '☰';
+            });
+        });
+    }
+
     // Scroll Animations using Intersection Observer
     const observerOptions = {
         threshold: 0.15,

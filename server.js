@@ -3,11 +3,18 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
-const FEEDBACK_FILE = 'feedback.csv';
+// Use persistent disk path if provided (for Render), otherwise use current directory
+const DATA_DIR = process.env.DATA_DIR || '.';
+const FEEDBACK_FILE = path.join(DATA_DIR, 'feedback.csv');
 
 // Helper to get today's date string
 function getTimestamp() {
     return new Date().toISOString();
+}
+
+// Ensure data directory exists
+if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
 // Create CSV if not exists with headers
